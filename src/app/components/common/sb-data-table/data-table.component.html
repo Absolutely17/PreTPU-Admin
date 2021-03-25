@@ -72,6 +72,7 @@
         [customCssClass]="row.customClass ? row.customClass : null"
         *ngFor="let row of virtualData; let rowIndex = index"
         (click)="handleRowClick(row, fromRow + rowIndex, $event)"
+        (dblclick)="handleRowDblClick(row, fromRow + rowIndex, $event); enableTextSelection();"
         (keyup)="selectable && _rowKeyup($event, row, rowIndex)"
         (keydown.space)="blockEvent($event)"
         (keydown.shift.space)="blockEvent($event)"

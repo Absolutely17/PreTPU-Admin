@@ -1,7 +1,7 @@
 import {Component} from '@angular/core';
 import {DomSanitizer} from '@angular/platform-browser';
 import {FormBuilder} from '@angular/forms';
-import {ISbDataTableColumn} from '../common/sb-data-table/data-table.component';
+import {ISbDataTableColumn, ISbDataTableRowClickEvent} from '../common/sb-data-table/data-table.component';
 import {TdDataTableService} from '@covalent/core/data-table';
 import {TdLoadingService} from '@covalent/core/loading';
 import {ArticleEditingDialogComponent} from '../dialog/article-edtiting-dialog/article-editing-dialog.component';
@@ -48,6 +48,8 @@ export class ArticleRegistryComponent extends TableComponent {
   iconAction = this.editIconAction;
 
   tableName = 'Реестр статей';
+
+  clickable = true;
 
   constructor(
     protected dataTableService: TdDataTableService,
@@ -103,6 +105,14 @@ export class ArticleRegistryComponent extends TableComponent {
       if (it) {
         this.refreshTable();
       }
+    });
+  }
+
+  public rowDoubleClick(event: ISbDataTableRowClickEvent): void {
+    this.openArticleDialog({
+      articleId: event.row.id,
+      mode: DialogMode.EDIT,
+      dicts: this.dicts
     });
   }
 

@@ -539,6 +539,8 @@ export class SbDataTableComponent
    */
   @Output() rowClick: EventEmitter<ISbDataTableRowClickEvent> = new EventEmitter<ISbDataTableRowClickEvent>();
 
+  @Output() rowDoubleClick: EventEmitter<ISbDataTableRowClickEvent> = new EventEmitter<ISbDataTableRowClickEvent>();
+
   /**
    * selectAll?: function
    * Event emitted when all rows are selected/deselected by the all checkbox. [selectable] needs to be enabled.
@@ -878,6 +880,14 @@ export class SbDataTableComponent
    * if clickable is true and selectable is false then select the row
    */
   handleRowClick(row: any, index: number, event: Event): void {
+    this.handleRowClickOrDblClick(row, index, event, this.rowClick);
+  }
+
+  handleRowDblClick(row: any, index: number, event: Event): void {
+    this.handleRowClickOrDblClick(row, index, event, this.rowDoubleClick);
+  }
+
+  handleRowClickOrDblClick(row: any, index: number, event: any, emitter: EventEmitter<ISbDataTableRowClickEvent>): void {
     if (this.clickable) {
       // ignoring linting rules here because attribute it actually null or not there
       // can't check for undefined
@@ -885,9 +895,11 @@ export class SbDataTableComponent
       const element: HTMLElement = event.target as HTMLElement;
       /* tslint:disable-next-line */
       if (srcElement.getAttribute('stopRowClick') === null && element.tagName.toLowerCase() !== 'mat-pseudo-checkbox') {
-        this.rowClick.emit({
-          row,
-          index,
+        emitter.emit({
+          row: row,
+          index: index,
+          // @ts-ignore
+          rawEvent: event
         });
       }
     }

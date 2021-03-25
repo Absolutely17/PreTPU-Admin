@@ -46,6 +46,7 @@
                             <sb-data-table
                               *ngIf="filteredData && (getDictsTableData() && dicts || !getDictsTableData())"
                               #dataTable
+                              [clickable]="clickable"
                               [data]="filteredData"
                               [columns]="columns"
                               [selectable]="selectable"
@@ -61,6 +62,7 @@
                               [iconAction]="iconAction"
                               [iconTooltip]="iconTooltip"
                               [iconColor]="iconColor"
+                              (rowDoubleClick)="rowDoubleClick($event)"
                             >
                               <ng-template *ngFor="let menuItemAdditional of additionalMenuItems"
                                            sbDataTableTemplate="{{menuItemAdditional.name}}" let-row="row">

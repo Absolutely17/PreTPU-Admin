@@ -2,7 +2,12 @@ import {TdDataTableService, TdDataTableSortingOrder} from '@covalent/core/data-t
 import {Input, OnInit, ViewChild} from '@angular/core';
 import {IPageChangeEvent, TdPagingBarComponent} from '@covalent/core/paging';
 import {TdLoadingService} from '@covalent/core/loading';
-import {ISbDataTableColumn, ISbDataTableSortingOrder, SbDataTableComponent} from '../sb-data-table/data-table.component';
+import {
+  ISbDataTableColumn,
+  ISbDataTableRowClickEvent,
+  ISbDataTableSortingOrder,
+  SbDataTableComponent
+} from '../sb-data-table/data-table.component';
 import {ISbDataTableSortChangeEvent} from '../sb-data-table/data-table-column/data-table-column.component';
 import {Observable} from 'rxjs';
 import * as moment from "moment";
@@ -94,6 +99,8 @@ export abstract class TableComponent implements OnInit {
   additionalMenuItems: AdditionalMenuItem[];
 
   _iconColumn: boolean;
+
+  clickable: boolean;
 
   @Input('iconColumn')
   set iconColumn(showIcon: boolean) {
@@ -253,6 +260,9 @@ export abstract class TableComponent implements OnInit {
    */
   protected customizeTableRows(tableRows: any[]): any[] {
     return tableRows;
+  }
+
+  public rowDoubleClick(event: ISbDataTableRowClickEvent): void {
   }
 
 }

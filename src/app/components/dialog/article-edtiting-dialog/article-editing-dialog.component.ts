@@ -208,9 +208,4 @@ export class ArticleEditingDialogComponent implements OnInit {
     let win = window.open('');
     win.document.write(image.outerHTML);
   }
-
-  @HostListener('window:keyup.esc')
-  onKeyUp(): void {
-    this.cancel();
-  }
 }
