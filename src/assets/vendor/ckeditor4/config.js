@@ -31,6 +31,7 @@ CKEDITOR.editorConfig = function( config ) {
 
   config.format_tags = 'p;h1;h2;h3;h4;h5;h6;address;div';
   config.extraAllowedContent = 'div{overflow-x}';
+  config.font_names = 'Calibri/Calibri,sans-serif;' + config.font_names
 };
 
 CKEDITOR.on( 'instanceReady', function( ev ) {
